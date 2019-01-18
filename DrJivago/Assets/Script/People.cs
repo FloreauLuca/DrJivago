@@ -12,26 +12,34 @@ public class People : MonoBehaviour
         rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
-    [SerializeField] private float peopleSpeed = 1;
-    
+    [SerializeField] private float peopleXSpeed = 1;
+    [SerializeField] private float peopleYSpeed = 1;
+
     void Update()
     {
-        
+        /*
         if (playerTransform.position.x < transform.position.x)
         {
-            transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z - 20);
-            Debug.Log("right");
+
+            transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, (30 * (playerTransform.position.x - transform.position.x)));
         }
         else
         {
-            transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z + 20);
-            Debug.Log("left");
+            transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, (30 * (playerTransform.position.x - transform.position.x)));
+        }*/
 
+
+        if (playerTransform.position.x < transform.position.x)
+        {
+
+            transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, -45);
         }
-        
-        rigidbody2D.velocity = (transform.rotation * Vector3.up * 5) - new Vector3(0, (MapManager.Instance.Speed * Time.deltaTime * (5+peopleSpeed)));
-        Debug.Log(transform.rotation * Vector3.up);
-        Debug.Log(new Vector3(0, (MapManager.Instance.Speed * Time.deltaTime * (5 + peopleSpeed))));
+        else
+        {
+            transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, 45);
+        }
+
+        rigidbody2D.velocity = new Vector2((transform.rotation * Vector3.up * peopleXSpeed).x, MapManager.Instance.Speed * Time.deltaTime * -peopleYSpeed);
         if (transform.position.y <= -10)
         {
             Destroy(gameObject);

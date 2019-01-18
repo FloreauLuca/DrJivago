@@ -8,16 +8,27 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float invicibilityCooldown;
 
     private SpriteRenderer spriteRenderer;
+
+    private Animator animator;
     // Start is called before the first frame update
     void Start()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetButtonDown("Fire"))
+        {
+            Attack();
+        }
+    }
+
+    private void Attack()
+    {
+        animator.SetTrigger("Attack");
     }
 
     public void Hurt()
