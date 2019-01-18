@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Obstacle
+  - Demonstrator
   layers:
   - Default
   - TransparentFX
@@ -40,4 +42,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: BackGround
+    uniqueID: 3418286725
+    locked: 0
+  - name: Object
+    uniqueID: 4078803521
+    locked: 0
+  - name: Roof
+    uniqueID: 1445847039
     locked: 0
