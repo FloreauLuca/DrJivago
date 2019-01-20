@@ -32,11 +32,11 @@ public class People : MonoBehaviour
         if (playerTransform.position.x < transform.position.x)
         {
 
-            transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, -45);
+            transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, -20);
         }
         else
         {
-            transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, 45);
+            transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, 20);
         }
 
         rigidbody2D.velocity = new Vector2((transform.rotation * Vector3.up * peopleXSpeed).x, MapManager.Instance.Speed * Time.deltaTime * -peopleYSpeed);
