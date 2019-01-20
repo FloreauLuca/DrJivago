@@ -23,6 +23,25 @@ public class PlayerMovement : MonoBehaviour
    
     void Update()
     {
+		float horizontal = Input.GetAxisRaw("Horizontal");
+
+		if (horizontal > 0)
+		{
+			MoveRight();
+		}
+		else
+		{
+			if (horizontal < 0)
+			{
+				MoveLeft();
+			}
+			else
+			{
+				StopMoveLeft();
+				StopMoveRight();
+			}
+		}
+
 		float currentSpeed = myRigidbody2D.velocity.x;
 		float newSpeed = 0.0f;
 
