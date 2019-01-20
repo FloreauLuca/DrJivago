@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,9 +12,26 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private GameObject sprite;
 
+    [SerializeField] private Button buttonLeft;
+
     private Animator animator;
 
     private Rigidbody2D rigidbody2D;
+
+    private bool pressedRight;
+    public bool PressedRight
+    {
+        get => pressedRight;
+        set => pressedRight = value;
+    }
+
+    private bool pressedLeft;
+    public bool PressedLeft
+    {
+        get => pressedLeft;
+        set => pressedLeft = value;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,13 +47,36 @@ public class PlayerController : MonoBehaviour
             Attack();
         }
 
-        if (Input.GetButton("Right"))
+        if (Input.GetButtonDown("Right"))
+        {
+            pressedRight = true;
+        }
+
+        if (Input.GetButtonDown("Left"))
+        {
+            pressedLeft = true;
+        }
+
+        if (pressedLeft && pressedRight)
+        {
+            Move(0);
+        } else
+        if (pressedRight)
         {
             Move(1);
-        } else if (Input.GetButton("Left"))
+        } else
+        if (pressedLeft)
         {
             Move(-1);
         }
+        else
+        {
+            Move(0);
+        }
+
+        pressedRight = false;
+        pressedLeft = false;
+
 
     }
 
