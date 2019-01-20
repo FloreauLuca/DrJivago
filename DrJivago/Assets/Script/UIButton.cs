@@ -18,7 +18,7 @@ public class UIButton : MonoBehaviour
     {
         if (right)
         {
-
+            GameManager.Instance.Player.PressedRight = pressed;
         }
         else
         {

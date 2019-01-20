@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
         set => player = value;
     }
 
+    private int score;
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -45,6 +47,11 @@ public class GameManager : MonoBehaviour
     public void LoadLevel(string nameLevel)
     {
         SceneManager.LoadScene(nameLevel);
+    }
+
+    public void AddScore()
+    {
+        score++;
     }
 
     public void QuitGame()

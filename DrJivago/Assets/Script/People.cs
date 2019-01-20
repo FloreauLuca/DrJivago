@@ -45,4 +45,10 @@ public class People : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void Die()
+    {
+        GameManager.Instance.AddScore();
+        Destroy(gameObject); 
+    }
 }

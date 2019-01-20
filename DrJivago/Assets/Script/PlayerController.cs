@@ -47,12 +47,12 @@ public class PlayerController : MonoBehaviour
             Attack();
         }
 
-        if (Input.GetButtonDown("Right"))
+        if (Input.GetButton("Right"))
         {
             pressedRight = true;
         }
 
-        if (Input.GetButtonDown("Left"))
+        if (Input.GetButton("Left"))
         {
             pressedLeft = true;
         }
@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
         {
             sprite.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
-        else
+        else if (axisHorizontal < 0)
         {
             sprite.transform.rotation = Quaternion.Euler(0, 180, 0);
 
