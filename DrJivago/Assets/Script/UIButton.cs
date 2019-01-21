@@ -22,24 +22,47 @@ public class UIButton : MonoBehaviour
     {
         if (right)
         {
+            if (Input.GetButtonDown("Right"))
+            {
+                pressed = true;
+            }
+
             GameManager.Instance.Player.PressedRight = pressed;
         }
         else
         {
+            if (Input.GetButtonDown("Left"))
+            {
+                pressed = true;
+            }
             GameManager.Instance.Player.PressedLeft = pressed;
+        }
+
+        if (pressed)
+        {
+
+            spriteRenderer.sprite = pressedSprite;
+        }
+        else
+        {
+
+            spriteRenderer.sprite = unpressedSprite;
+        }
+
+        if (Input.GetButtonUp("Left") || Input.GetButtonUp("Right"))
+        {
+            pressed = false;
         }
     }
 
     private void OnMouseDown()
     {
         pressed = true;
-        spriteRenderer.sprite = pressedSprite;
     }
 
     private void OnMouseUp()
     {
         pressed = false;
-        spriteRenderer.sprite = unpressedSprite;
 
     }
 
@@ -51,7 +74,6 @@ public class UIButton : MonoBehaviour
     private void OnMouseExit()
     {
         pressed = false;
-        spriteRenderer.sprite = unpressedSprite;
 
     }
 }

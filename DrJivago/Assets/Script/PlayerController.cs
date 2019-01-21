@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private int life;
+    public int Life => life;
+
+    
     [SerializeField] private float invicibilityCooldown;
     [SerializeField] private float shockCooldown;
 
@@ -17,6 +20,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     
     private Animator animator;
+    private AudioSource audioSource;
+    public AudioSource AudioSource
+    {
+        get => audioSource;
+        set => audioSource = value;
+    }
 
     private Rigidbody2D rigidbody2D;
 
@@ -34,11 +43,18 @@ public class PlayerController : MonoBehaviour
         set => pressedLeft = value;
     }
 
+    [SerializeField] private AudioClip sword;
+    [SerializeField] private AudioClip hurt;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         rigidbody2D = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
+        audioSource.enabled = false;
     }
 
     // Update is called once per frame
@@ -47,16 +63,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Fire"))
         {
             Attack();
-        }
-
-        if (Input.GetButton("Right"))
-        {
-            pressedRight = true;
-        }
-
-        if (Input.GetButton("Left"))
-        {
-            pressedLeft = true;
         }
 
         if (pressedLeft && pressedRight)
@@ -76,9 +82,7 @@ public class PlayerController : MonoBehaviour
             Move(0);
         }
 
-        pressedRight = false;
-        pressedLeft = false;
-
+        rigidbody2D.velocity = Vector2.zero;
 
     }
 
@@ -100,6 +104,7 @@ public class PlayerController : MonoBehaviour
     public void Attack()
     {
         animator.SetTrigger("Attack");
+        audioSource.PlayOneShot(sword);
     }
 
     public void Hurt()
@@ -107,6 +112,7 @@ public class PlayerController : MonoBehaviour
         if (!invicibility)
         {
             life--;
+            UIManager.Instance.DisplayLife(life);
             if (life > 0)
             {
                 StartCoroutine(Invicibility());
@@ -125,6 +131,7 @@ public class PlayerController : MonoBehaviour
         spriteRenderer.color = new Color(1, 1, 1, 0.5f);
         MapManager.Instance.Speed /= 2;
         invicibility = true;
+        audioSource.PlayOneShot(hurt);
         yield return new WaitForSeconds(shockCooldown);
         MapManager.Instance.Speed *= 2;
         

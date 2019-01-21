@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Lamp : MonoBehaviour
 {
+    private AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -26,6 +28,7 @@ public class Lamp : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             GameManager.Instance.Player.Hurt();
+            audioSource.Play();
         }
     }
 }
