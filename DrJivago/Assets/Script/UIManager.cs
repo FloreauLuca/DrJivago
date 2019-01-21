@@ -1,9 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI timeText;
+
+    [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject endPanel;
+    [SerializeField] private GameObject HUDPanel;
+    [SerializeField] private TextMeshProUGUI endScoreText;
+
+    public static UIManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +29,48 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void DisplayScore(float score)
+    {
+        scoreText.text = "Score : " + score.ToString();
+    }
+
+
+    public void DisplayTime(float time)
+    {
+        timeText.text = "Time : " + time.ToString();
+
+    }
+
+
+    public void MenuButton()
+    {
+        GameManager.Instance.Menu();
+    }
+
+    public void StartButton()
+    {
+        GameManager.Instance.Restart();
+    }
+
+    public void End(int score)
+    {
+        endPanel.SetActive(true);
+        HUDPanel.SetActive(false);
+        endScoreText.text = "Score : " + score.ToString();
+    }
+
+    public void Pause(bool pause)
+    {
+        if (pause)
+        {
+            pausePanel.SetActive(true);
+        }
+        else
+        {
+            pausePanel.SetActive(false);
+        }
+
     }
 }
