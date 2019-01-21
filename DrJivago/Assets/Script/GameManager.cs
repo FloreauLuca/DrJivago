@@ -28,7 +28,6 @@ public class GameManager : MonoBehaviour
         }
 
         time += Time.deltaTime;
-        UIManager.Instance.DisplayTime(time);
     }
     
     private void Awake()
@@ -43,12 +42,12 @@ public class GameManager : MonoBehaviour
             //DontDestroyOnLoad(gameObject);
         }
         Time.timeScale = 0;
-
+        Setup();
     }
 
     private void Start()
     {
-        Setup();
+        player.enabled = false;
     }
 
     public void Restart()
@@ -57,8 +56,9 @@ public class GameManager : MonoBehaviour
         time = 0;
         Time.timeScale = 1;
         UIManager.Instance.DisplayScore(score);
-        UIManager.Instance.DisplayTime(time);
+        UIManager.Instance.DisplayLife(player.Life);
         player.enabled = true;
+        player.AudioSource.enabled = true;
     }
 
     public void Menu()
@@ -69,7 +69,6 @@ public class GameManager : MonoBehaviour
     public void Setup()
     {
         player = GameObject.FindObjectOfType<PlayerController>();
-        player.enabled = false;
     }
 
     public void Pause()

@@ -6,7 +6,7 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private TextMeshProUGUI timeText;
+    [SerializeField] private TextMeshProUGUI lifeText;
 
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject endPanel;
@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void DisplayScore(float score)
@@ -37,9 +37,9 @@ public class UIManager : MonoBehaviour
     }
 
 
-    public void DisplayTime(float time)
+    public void DisplayLife(float life)
     {
-        timeText.text = "Time : " + time.ToString();
+        lifeText.text = "Life : " + life.ToString();
 
     }
 

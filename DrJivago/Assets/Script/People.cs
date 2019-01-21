@@ -16,11 +16,14 @@ public class People : MonoBehaviour
 
     private bool dead = false;
 
+    [SerializeField] private AudioClip death;
+    private AudioSource audioSource;
 
     void Start()
     {
         playerTransform = GameManager.Instance.Player.transform;
         rigidbody2D = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -68,6 +71,8 @@ public class People : MonoBehaviour
         spriteAlive.GetComponent<Animator>().enabled = false;
         spriteDeath.GetComponent<SpriteRenderer>().enabled = true;
         dead = true;
-
+        audioSource.clip = death;
+        audioSource.loop = false;
+        audioSource.Play();
     }
 }
