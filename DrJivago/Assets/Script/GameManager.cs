@@ -14,7 +14,11 @@ public class GameManager : MonoBehaviour
         set => player = value;
     }
 
-    private int score;
+    private int score = 0;
+
+    private float time = 0;
+
+    private bool pause = false;
 
     void Update()
     {
@@ -22,6 +26,9 @@ public class GameManager : MonoBehaviour
         {
             QuitGame();
         }
+
+        time += Time.deltaTime;
+        UIManager.Instance.DisplayTime(time);
     }
     
     private void Awake()
@@ -33,15 +40,53 @@ public class GameManager : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
+        Time.timeScale = 0;
 
+    }
+
+    private void Start()
+    {
         Setup();
+    }
+
+    public void Restart()
+    {
+        score = 0;
+        time = 0;
+        Time.timeScale = 1;
+        UIManager.Instance.DisplayScore(score);
+        UIManager.Instance.DisplayTime(time);
+        player.enabled = true;
+    }
+
+    public void Menu()
+    {
+        LoadLevel("Luca");
     }
 
     public void Setup()
     {
         player = GameObject.FindObjectOfType<PlayerController>();
+        player.enabled = false;
+    }
+
+    public void Pause()
+    {
+        if (pause)
+        {
+            pause = false;
+            Time.timeScale = 0;
+        }
+        else
+        {
+
+            pause = true;
+            Time.timeScale = 0;
+        }
+
+        UIManager.Instance.Pause(pause);
     }
 
     public void LoadLevel(string nameLevel)
@@ -52,6 +97,14 @@ public class GameManager : MonoBehaviour
     public void AddScore()
     {
         score++;
+        UIManager.Instance.DisplayScore(score);
+    }
+
+    public void End()
+    {
+        UIManager.Instance.End(score);
+        Time.timeScale = 0;
+        player.enabled = false;
     }
 
     public void QuitGame()

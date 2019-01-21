@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class UIButton : MonoBehaviour
 {
-    private bool pressed;
+    private bool pressed = false;
+    [SerializeField] private Sprite pressedSprite;
+    [SerializeField] private Sprite unpressedSprite;
 
     [SerializeField] private bool right;
+
+    private SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
     void Start()
     {
-
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -29,11 +33,14 @@ public class UIButton : MonoBehaviour
     private void OnMouseDown()
     {
         pressed = true;
+        spriteRenderer.sprite = pressedSprite;
     }
 
     private void OnMouseUp()
     {
         pressed = false;
+        spriteRenderer.sprite = unpressedSprite;
+
     }
 
     private void OnMouseEnter()
@@ -44,5 +51,7 @@ public class UIButton : MonoBehaviour
     private void OnMouseExit()
     {
         pressed = false;
+        spriteRenderer.sprite = unpressedSprite;
+
     }
 }

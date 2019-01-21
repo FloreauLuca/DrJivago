@@ -6,14 +6,22 @@ public class People : MonoBehaviour
 {
     private Transform playerTransform;
     private Rigidbody2D rigidbody2D;
+
+    [SerializeField] private GameObject spriteAlive;
+    [SerializeField] private GameObject spriteDeath;
+
+
+    [SerializeField] private float peopleXSpeed = 1;
+    [SerializeField] private float peopleYSpeed = 1;
+
+    private bool dead = false;
+
+
     void Start()
     {
         playerTransform = GameManager.Instance.Player.transform;
         rigidbody2D = GetComponent<Rigidbody2D>();
     }
-
-    [SerializeField] private float peopleXSpeed = 1;
-    [SerializeField] private float peopleYSpeed = 1;
 
     void Update()
     {
@@ -28,18 +36,25 @@ public class People : MonoBehaviour
             transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, (30 * (playerTransform.position.x - transform.position.x)));
         }*/
 
-
-        if (playerTransform.position.x < transform.position.x)
+        if (!dead)
         {
+            if (playerTransform.position.x < transform.position.x)
+            {
 
-            transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, -20);
+                transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, -20);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, 20);
+            }
+
+            rigidbody2D.velocity = new Vector2((transform.rotation * Vector3.up * peopleXSpeed).x, MapManager.Instance.Speed * Time.deltaTime * -peopleYSpeed);
         }
         else
         {
-            transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, 20);
+            transform.position = new Vector3(transform.position.x, transform.position.y - (MapManager.Instance.Speed * Time.deltaTime), transform.position.z);
         }
 
-        rigidbody2D.velocity = new Vector2((transform.rotation * Vector3.up * peopleXSpeed).x, MapManager.Instance.Speed * Time.deltaTime * -peopleYSpeed);
         if (transform.position.y <= -10)
         {
             Destroy(gameObject);
@@ -49,6 +64,10 @@ public class People : MonoBehaviour
     public void Die()
     {
         GameManager.Instance.AddScore();
-        Destroy(gameObject); 
+        spriteAlive.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.2f);
+        spriteAlive.GetComponent<Animator>().enabled = false;
+        spriteDeath.GetComponent<SpriteRenderer>().enabled = true;
+        dead = true;
+
     }
 }

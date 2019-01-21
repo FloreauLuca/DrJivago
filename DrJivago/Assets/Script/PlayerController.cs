@@ -7,13 +7,15 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private int life;
     [SerializeField] private float invicibilityCooldown;
+    [SerializeField] private float shockCooldown;
 
     [SerializeField] private float playerSpeed;
+    private bool invicibility;
 
     [SerializeField] private GameObject sprite;
 
-    [SerializeField] private Button buttonLeft;
-
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    
     private Animator animator;
 
     private Rigidbody2D rigidbody2D;
@@ -102,21 +104,32 @@ public class PlayerController : MonoBehaviour
 
     public void Hurt()
     {
-        life--;
-        if (life > 0)
+        if (!invicibility)
         {
-            StartCoroutine(Invicibility());
-        }
-        else
-        {
-            gameObject.SetActive(false);
+            life--;
+            if (life > 0)
+            {
+                StartCoroutine(Invicibility());
+            }
+            else
+            {
+                animator.enabled = false;
+                MapManager.Instance.Speed = 0;
+                GameManager.Instance.End();
+            }
         }
     }
 
     private IEnumerator Invicibility()
     {
-        //spriteRenderer.color = new Color(1, 1, 1, 0.5f);
+        spriteRenderer.color = new Color(1, 1, 1, 0.5f);
+        MapManager.Instance.Speed /= 2;
+        invicibility = true;
+        yield return new WaitForSeconds(shockCooldown);
+        MapManager.Instance.Speed *= 2;
+        
         yield return new WaitForSeconds(invicibilityCooldown);
-        //spriteRenderer.color = new Color(1, 1, 1, 1);
+        invicibility = false;
+        spriteRenderer.color = new Color(1, 1, 1, 1);
     }
 }
