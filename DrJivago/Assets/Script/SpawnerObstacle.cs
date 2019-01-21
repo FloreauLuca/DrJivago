@@ -35,10 +35,6 @@ public class SpawnerObstacle : MonoBehaviour
             {
                 timeBetweenSpawn -= diminutionTimeBetweenSpawn;
             }
-            else
-            {
-                timeBetweenSpawn /= 2;
-            }
             float XSpawn = Random.Range(minXSpawn, maxXSpawn);
             Instantiate(objectPrefab[Random.Range(0, objectPrefab.Length)], new Vector3(XSpawn, transform.position.y, 0), transform.rotation, transform);
         }

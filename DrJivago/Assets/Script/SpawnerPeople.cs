@@ -39,10 +39,6 @@ public class SpawnerPeople : MonoBehaviour
             {
                 timeBetweenSpawn -= diminutionTimeBetweenSpawn;
             }
-            else
-            {
-                timeBetweenSpawn /= 2;
-            }
 
             for (int i = 0; i < nbEnemy; i++)
             {
