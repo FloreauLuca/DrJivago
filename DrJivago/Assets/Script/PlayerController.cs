@@ -64,8 +64,9 @@ public class PlayerController : MonoBehaviour
         {
             Attack();
         }
-
-        if (pressedLeft && pressedRight)
+    }
+    /*
+    if (pressedLeft && pressedRight)
         {
             Move(0);
         } else
@@ -100,7 +101,7 @@ public class PlayerController : MonoBehaviour
 
         transform.position = new Vector3(transform.position.x + (axisHorizontal * playerSpeed), transform.position.y, 0);
     }
-
+    */
     public void Attack()
     {
         animator.SetTrigger("Attack");

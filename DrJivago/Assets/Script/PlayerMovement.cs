@@ -73,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
 		if (Math.Abs(newSpeed) > topSpeed)
 		{
 
-			Debug.Log("Reached TopSpeed");
+
 
 			if (newSpeed > 0)
 			{
