@@ -11,47 +11,69 @@ public class UIButton : MonoBehaviour
     [SerializeField] private bool right;
 
     private SpriteRenderer spriteRenderer;
-    // Start is called before the first frame update
+    private PlayerMovement myPlayer;
+
     void Start()
     {
+        myPlayer = FindObjectOfType<PlayerMovement>();
+    
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (right)
+        if (GameManager.Instance.Player.enabled)
         {
-            if (Input.GetButtonDown("Right"))
+            if (right)
             {
-                pressed = true;
+                if (Input.GetButtonDown("Right"))
+                {
+                    pressed = true;
+                }
+
+                if (pressed)
+                {
+                    myPlayer.MoveRight();
+                }
+                else
+                {
+                    myPlayer.StopMoveRight();
+                }
+            }
+            else
+            {
+                if (Input.GetButtonDown("Left"))
+                {
+                    pressed = true;
+                }
+
+                if (pressed)
+                {
+                    myPlayer.MoveLeft();
+                }
+                else
+                {
+                    myPlayer.StopMoveLeft();
+                }
             }
 
-            GameManager.Instance.Player.PressedRight = pressed;
-        }
-        else
-        {
-            if (Input.GetButtonDown("Left"))
+
+            if (pressed)
             {
-                pressed = true;
+
+                spriteRenderer.sprite = pressedSprite;
             }
-            GameManager.Instance.Player.PressedLeft = pressed;
-        }
+            else
+            {
 
-        if (pressed)
-        {
+                spriteRenderer.sprite = unpressedSprite;
+            }
 
-            spriteRenderer.sprite = pressedSprite;
-        }
-        else
-        {
-
-            spriteRenderer.sprite = unpressedSprite;
-        }
-
-        if (Input.GetButtonUp("Left") || Input.GetButtonUp("Right"))
-        {
-            pressed = false;
+            if (Input.GetButtonUp("Left") || Input.GetButtonUp("Right"))
+            {
+                pressed = false;
+            }
         }
     }
 

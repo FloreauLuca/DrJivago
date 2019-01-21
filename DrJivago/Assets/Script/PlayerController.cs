@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float playerSpeed;
     private bool invicibility;
 
-    [SerializeField] private GameObject sprite;
 
     [SerializeField] private SpriteRenderer spriteRenderer;
     
@@ -64,8 +63,9 @@ public class PlayerController : MonoBehaviour
         {
             Attack();
         }
-
-        if (pressedLeft && pressedRight)
+    }
+    /*
+    if (pressedLeft && pressedRight)
         {
             Move(0);
         } else
@@ -97,10 +97,8 @@ public class PlayerController : MonoBehaviour
             sprite.transform.rotation = Quaternion.Euler(0, 180, 0);
 
         }
-
-        transform.position = new Vector3(transform.position.x + (axisHorizontal * playerSpeed), transform.position.y, 0);
     }
-
+    */
     public void Attack()
     {
         animator.SetTrigger("Attack");
