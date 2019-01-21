@@ -10,9 +10,12 @@ public class PlayerMovement : MonoBehaviour
 
 	private bool movesLeft = false;
 	private bool movesRight = false;
-	private bool wentLeft = false;		// Tracks last directionbutton clicked
+	private bool wentLeft = false;      // Tracks last directionbutton clicked
 
-	[SerializeField] private float acceleration = 30.0f;
+
+    [SerializeField] private GameObject sprite;
+
+    [SerializeField] private float acceleration = 30.0f;
 	[SerializeField] private float topSpeed = 6.0f;
 
 	void Start()
@@ -28,19 +31,18 @@ public class PlayerMovement : MonoBehaviour
 		if (horizontal > 0)
 		{
 			MoveRight();
+
 		}
-		else
+		else if (horizontal < 0)
 		{
-			if (horizontal < 0)
-			{
 				MoveLeft();
-			}
-			else
-			{
-				StopMoveLeft();
-				StopMoveRight();
-			}
 		}
+		else if (!movesLeft && !movesRight)
+		{
+			StopMoveLeft();
+			StopMoveRight();
+		}
+		
 
 		float currentSpeed = myRigidbody2D.velocity.x;
 		float newSpeed = 0.0f;
@@ -97,7 +99,8 @@ public class PlayerMovement : MonoBehaviour
 	{
 		movesLeft = true;
 
-		if (!wentLeft)
+	    sprite.transform.rotation = Quaternion.Euler(0, 180, 0);
+        if (!wentLeft)
 		{
 			myRigidbody2D.velocity = new Vector2(0.0f, 0.0f);
 			wentLeft = true;
@@ -109,7 +112,8 @@ public class PlayerMovement : MonoBehaviour
 	{
 		movesRight = true;
 
-		if (wentLeft)
+	    sprite.transform.rotation = Quaternion.Euler(0, 0, 0);
+        if (wentLeft)
 		{
 			myRigidbody2D.velocity = new Vector2(0.0f, 0.0f);
 			wentLeft = false;
@@ -119,10 +123,10 @@ public class PlayerMovement : MonoBehaviour
 	public void StopMoveLeft()
 	{
 		movesLeft = false;
-	}
+    }
 
-	public void StopMoveRight()
+    public void StopMoveRight()
 	{
 		movesRight = false;
-	}
+    }
 }
