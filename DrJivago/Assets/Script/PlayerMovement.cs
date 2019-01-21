@@ -90,8 +90,6 @@ public class PlayerMovement : MonoBehaviour
 
 		Vector2 newVelocity = new Vector2(newSpeed, 0.0f);
 
-	
-
 		myRigidbody2D.velocity = newVelocity;
     }
 
