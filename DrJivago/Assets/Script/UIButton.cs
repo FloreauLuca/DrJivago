@@ -11,35 +11,80 @@ public class UIButton : MonoBehaviour
     [SerializeField] private bool right;
 
     private SpriteRenderer spriteRenderer;
-    // Start is called before the first frame update
+    private PlayerMovement myPlayer;
+
     void Start()
     {
+        myPlayer = FindObjectOfType<PlayerMovement>();
+    
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (right)
+        if (GameManager.Instance.Player.enabled)
         {
-            GameManager.Instance.Player.PressedRight = pressed;
-        }
-        else
-        {
-            GameManager.Instance.Player.PressedLeft = pressed;
+            if (right)
+            {
+                if (Input.GetButtonDown("Right"))
+                {
+                    pressed = true;
+                }
+
+                if (pressed)
+                {
+                    myPlayer.MoveRight();
+                }
+                else
+                {
+                    myPlayer.StopMoveRight();
+                }
+            }
+            else
+            {
+                if (Input.GetButtonDown("Left"))
+                {
+                    pressed = true;
+                }
+
+                if (pressed)
+                {
+                    myPlayer.MoveLeft();
+                }
+                else
+                {
+                    myPlayer.StopMoveLeft();
+                }
+            }
+
+
+            if (pressed)
+            {
+
+                spriteRenderer.sprite = pressedSprite;
+            }
+            else
+            {
+
+                spriteRenderer.sprite = unpressedSprite;
+            }
+
+            if (Input.GetButtonUp("Left") || Input.GetButtonUp("Right"))
+            {
+                pressed = false;
+            }
         }
     }
 
     private void OnMouseDown()
     {
         pressed = true;
-        spriteRenderer.sprite = pressedSprite;
     }
 
     private void OnMouseUp()
     {
         pressed = false;
-        spriteRenderer.sprite = unpressedSprite;
 
     }
 
@@ -51,7 +96,6 @@ public class UIButton : MonoBehaviour
     private void OnMouseExit()
     {
         pressed = false;
-        spriteRenderer.sprite = unpressedSprite;
 
     }
 }
