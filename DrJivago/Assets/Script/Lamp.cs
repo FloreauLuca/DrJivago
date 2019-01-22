@@ -27,10 +27,11 @@ public class Lamp : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (GameManager.Instance.Player.Hurt())
-            {
-                audioSource.Play();
-            }
+			if (!GameManager.Instance.Player.GetInvincibility())
+			{
+				GameManager.Instance.Player.Hurt();
+				audioSource.Play();
+			}
         }
     }
 }

@@ -13,7 +13,9 @@ public class SpawnerPeople : MonoBehaviour
     [SerializeField] private float timeBetweenSpawn;
     [SerializeField] private float diminutionTimeBetweenSpawn;
 
-    private bool end = true;
+	[SerializeField] private float minimumTimeBetweenSpawn;
+
+	private bool end = true;
 
     [SerializeField] private GameObject[] peoplePrefab;
 
