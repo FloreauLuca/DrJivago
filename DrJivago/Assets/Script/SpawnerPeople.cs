@@ -13,7 +13,9 @@ public class SpawnerPeople : MonoBehaviour
     [SerializeField] private float timeBetweenSpawn;
     [SerializeField] private float diminutionTimeBetweenSpawn;
 
-    private bool end = true;
+	[SerializeField] private float minimumTimeBetweenSpawn;
+
+	private bool end = true;
 
     [SerializeField] private GameObject[] peoplePrefab;
 
@@ -35,10 +37,10 @@ public class SpawnerPeople : MonoBehaviour
         {
             int nbEnemy = Random.Range(minNbEnemy, maxNbEnemy);
             yield return new WaitForSeconds(timeBetweenSpawn);
-            if (timeBetweenSpawn > diminutionTimeBetweenSpawn)
-            {
-                timeBetweenSpawn -= diminutionTimeBetweenSpawn;
-            }
+			if (timeBetweenSpawn > minimumTimeBetweenSpawn)
+			{
+				timeBetweenSpawn -= diminutionTimeBetweenSpawn;
+			}
 
             for (int i = 0; i < nbEnemy; i++)
             {
