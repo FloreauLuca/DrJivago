@@ -31,7 +31,10 @@ public class UIButton : MonoBehaviour
                 {
                     pressed = true;
                 }
-
+                if (Input.GetButtonUp("Right"))
+                {
+                    pressed = false;
+                }
                 if (pressed)
                 {
                     myPlayer.MoveRight();
@@ -47,7 +50,10 @@ public class UIButton : MonoBehaviour
                 {
                     pressed = true;
                 }
-
+                if (Input.GetButtonUp("Left"))
+                {
+                    pressed = false;
+                }
                 if (pressed)
                 {
                     myPlayer.MoveLeft();
@@ -70,10 +76,7 @@ public class UIButton : MonoBehaviour
                 spriteRenderer.sprite = unpressedSprite;
             }
 
-            if (Input.GetButtonUp("Left") || Input.GetButtonUp("Right"))
-            {
-                pressed = false;
-            }
+            
         }
     }
 

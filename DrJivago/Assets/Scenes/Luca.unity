@@ -745,7 +745,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 117
+  Priority: 37
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -1062,7 +1062,7 @@ MonoBehaviour:
   maxXSpawn: -1.5
   timeBetweenSpawn: 5
   diminutionTimeBetweenSpawn: 0.1
-  minimumTimeBetweenSpawn: 0.3
+  minimumTimeBetweenSpawn: 0.5
   peoplePrefab:
   - {fileID: 6622547627924484878, guid: 2a489451e6008bc4ba5a2d29f5fcd2fa, type: 3}
   - {fileID: 7250619393097131155, guid: d00b3aea5e8f39d429517d3da2b314e7, type: 3}
@@ -2024,7 +2024,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 256
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500

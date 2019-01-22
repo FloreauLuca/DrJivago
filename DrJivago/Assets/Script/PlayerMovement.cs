@@ -26,25 +26,27 @@ public class PlayerMovement : MonoBehaviour
    
     void Update()
     {
-		float horizontal = Input.GetAxisRaw("Horizontal");
+        if (GameManager.Instance.Player.enabled)
+        {
+            float horizontal = Input.GetAxisRaw("Horizontal");
 
-		if (horizontal > 0)
-		{
-			MoveRight();
+            if (horizontal > 0)
+            {
+                MoveRight();
 
-		}
-		else if (horizontal < 0)
-		{
-				MoveLeft();
-		}
-		else if (!movesLeft && !movesRight)
-		{
-			StopMoveLeft();
-			StopMoveRight();
-		}
-		
+            }
+            else if (horizontal < 0)
+            {
+                MoveLeft();
+            }
+            else if (!movesLeft && !movesRight)
+            {
+                StopMoveLeft();
+                StopMoveRight();
+            }
+        }
 
-		float currentSpeed = myRigidbody2D.velocity.x;
+        float currentSpeed = myRigidbody2D.velocity.x;
 		float newSpeed = 0.0f;
 
 		if (movesRight && movesLeft)
