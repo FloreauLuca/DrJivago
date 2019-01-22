@@ -1062,7 +1062,7 @@ MonoBehaviour:
   maxXSpawn: -1.5
   timeBetweenSpawn: 5
   diminutionTimeBetweenSpawn: 0.1
-  minimumTimeBetweenSpawn: 0.35
+  minimumTimeBetweenSpawn: 0.3
   peoplePrefab:
   - {fileID: 6622547627924484878, guid: 2a489451e6008bc4ba5a2d29f5fcd2fa, type: 3}
   - {fileID: 7250619393097131155, guid: d00b3aea5e8f39d429517d3da2b314e7, type: 3}
