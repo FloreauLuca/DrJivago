@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
         audioSource.PlayOneShot(sword);
     }
 
-    public void Hurt()
+    public bool Hurt()
     {
             life--;
             UIManager.Instance.DisplayLife(life);
