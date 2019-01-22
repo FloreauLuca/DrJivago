@@ -27,8 +27,10 @@ public class Lamp : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            GameManager.Instance.Player.Hurt();
-            audioSource.Play();
+            if (GameManager.Instance.Player.Hurt())
+            {
+                audioSource.Play();
+            }
         }
     }
 }

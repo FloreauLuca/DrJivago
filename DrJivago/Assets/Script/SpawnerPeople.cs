@@ -35,7 +35,7 @@ public class SpawnerPeople : MonoBehaviour
         {
             int nbEnemy = Random.Range(minNbEnemy, maxNbEnemy);
             yield return new WaitForSeconds(timeBetweenSpawn);
-            if (timeBetweenSpawn > diminutionTimeBetweenSpawn)
+            if (timeBetweenSpawn > 0.3)
             {
                 timeBetweenSpawn -= diminutionTimeBetweenSpawn;
             }

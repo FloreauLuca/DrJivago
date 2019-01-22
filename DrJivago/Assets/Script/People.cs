@@ -13,6 +13,7 @@ public class People : MonoBehaviour
 
     [SerializeField] private float peopleXSpeed = 1;
     [SerializeField] private float peopleYSpeed = 1;
+    [SerializeField] private Color deathColor;
 
     private bool dead = false;
 
@@ -67,9 +68,10 @@ public class People : MonoBehaviour
     public void Die()
     {
         GameManager.Instance.AddScore();
-        spriteAlive.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.2f);
+        spriteAlive.GetComponent<SpriteRenderer>().color = deathColor;
         spriteAlive.GetComponent<Animator>().enabled = false;
         spriteDeath.GetComponent<SpriteRenderer>().enabled = true;
+        rigidbody2D.bodyType = RigidbodyType2D.Static;
         dead = true;
         audioSource.clip = death;
         audioSource.loop = false;

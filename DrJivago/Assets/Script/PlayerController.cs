@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
         audioSource.PlayOneShot(sword);
     }
 
-    public void Hurt()
+    public bool Hurt()
     {
         if (!invicibility)
         {
@@ -121,7 +121,11 @@ public class PlayerController : MonoBehaviour
                 MapManager.Instance.Speed = 0;
                 GameManager.Instance.End();
             }
+
+            return true;
         }
+
+        return false;
     }
 
     private IEnumerator Invicibility()
