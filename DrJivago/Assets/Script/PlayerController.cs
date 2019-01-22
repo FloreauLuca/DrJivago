@@ -107,8 +107,6 @@ public class PlayerController : MonoBehaviour
 
     public void Hurt()
     {
-        if (!invicibility)
-        {
             life--;
             UIManager.Instance.DisplayLife(life);
             if (life > 0)
@@ -121,8 +119,12 @@ public class PlayerController : MonoBehaviour
                 MapManager.Instance.Speed = 0;
                 GameManager.Instance.End();
             }
-        }
     }
+
+	public bool GetInvincibility()
+	{
+		return invicibility;
+	}
 
     private IEnumerator Invicibility()
     {
